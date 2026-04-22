@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Karnaukh — Sales Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8B6F2E;
+    --black: #0A0A0A;
+    --black-soft: #111111;
+    --black-card: #161616;
+    --black-border: #222222;
+    --white: #F5F0E8;
+    --white-dim: #A89F8C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 160px 60px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-industries {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.3s;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(56px, 9vw, 130px);
+    font-weight: 800;
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 21px;
+    font-weight: 300;
+    color: var(--white-dim);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 16px 36px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    padding: 15px 36px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black-border);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--gold); border-color: var(--gold); }
+
+  .stats-bar {
+    border-top: 1px solid var(--black-border);
+    border-bottom: 1px solid var(--black-border);
+    padding: 48px 60px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+
+  .stat {
+    padding: 0 32px;
+    border-right: 1px solid var(--black-border);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+  }
+
+  section { padding: 100px 60px; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(40px, 5.5vw, 72px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 56px;
+  }
+
+  .section-title em { font-style: normal; color: var(--gold); }
+
+  .philosophy {
+    background: var(--black-soft);
+    border-top: 1px solid var(--black-border);
+    border-bottom: 1px solid var(--black-border);
+  }
+
+  .philosophy-intro {
+    max-width: 700px;
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--white-dim);
+    margin-bottom: 64px;
+  }
+
+  .principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .principle {
+    background: var(--black-card);
+    padding: 40px;
+    border: 1px solid var(--black-border);
+    transition: border-color 0.3s;
+  }
+  .principle:hover { border-color: var(--gold-dim); }
+  .principle.full-width { grid-column: 1 / -1; }
+
+  .principle-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .principle h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+
+  .principle p { font-size: 17px; color: var(--white-dim); line-height: 1.7; }
+
+  .resonance {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--black-border);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white-dim);
+    max-width: 680px;
+  }
+  .resonance em { color: var(--gold); font-style: italic; }
+
+  .services-header { margin-bottom: 56px; }
+
+  .services-desc {
+    font-size: 19px;
+    color: var(--white-dim);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .service-card {
+    background: var(--black-card);
+    border: 1px solid var(--black-border);
+    padding: 36px 40px;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: bottom;
+  }
+
+  .service-card:hover::before { transform: scaleY(1); }
+  .service-card:hover { border-color: var(--gold-dim); }
+
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .service-card p { font-size: 16px; color: var(--white-dim); line-height: 1.6; }
+
+  .about {
+    background: var(--black-soft);
+    border-top: 1px solid var(--black-border);
+  }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 18px;
+    color: var(--white-dim);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .about-text strong { color: var(--white); font-weight: 500; }
+
+  .career-timeline { margin-top: 48px; }
+
+  .career-item {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--black-border);
+  }
+  .career-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .career-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-top: 6px;
+  }
+
+  .career-role {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .career-desc { font-size: 16px; color: var(--white-dim); line-height: 1.6; }
+
+  .numbers-block {
+    background: var(--black-card);
+    border: 1px solid var(--black-border);
+    padding: 48px;
+    margin-bottom: 32px;
+  }
+
+  .numbers-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .number-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--black-border);
+  }
+  .number-row:last-child { border-bottom: none; }
+
+  .number-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+
+  .number-desc {
+    font-size: 15px;
+    color: var(--white-dim);
+    text-align: right;
+    max-width: 200px;
+    line-height: 1.4;
+  }
+
+  .personal-block {
+    background: var(--black-card);
+    border: 1px solid var(--black-border);
+    border-left: 3px solid var(--gold);
+    padding: 36px 40px;
+  }
+
+  .personal-block p {
+    font-size: 17px;
+    color: var(--white-dim);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .personal-block p:last-child { margin-bottom: 0; }
+
+  .faq-section {
+    border-top: 1px solid var(--black-border);
+    border-bottom: 1px solid var(--black-border);
+    background: var(--black-soft);
+  }
+
+  .faq-list {
+    margin-top: 56px;
+    border-top: 1px solid var(--black-border);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--black-border);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    text-align: left;
+    padding: 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--gold); }
+
+  .faq-icon {
+    min-width: 28px;
+    height: 28px;
+    border: 1px solid var(--black-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--gold);
+    transition: transform 0.3s, background 0.2s;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: var(--gold);
+    color: var(--black);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 400px;
+  }
+
+  .faq-answer-inner {
+    padding-bottom: 32px;
+    font-size: 18px;
+    color: var(--white-dim);
+    line-height: 1.8;
+    max-width: 780px;
+  }
+
+  .faq-answer-inner strong { color: var(--white); font-weight: 500; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--black-soft);
+    border-top: 1px solid var(--black-border);
+    text-align: center;
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 28px;
+  }
+
+  .cta-section h2 em { color: var(--gold); font-style: normal; display: block; }
+
+  .cta-section p {
+    font-size: 18px;
+    color: var(--white-dim);
+    max-width: 520px;
+    margin: 0 auto 52px;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .cta-contacts {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--black-border);
+  }
+
+  .cta-contact-item { text-align: center; }
+
+  .cta-contact-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
+
+  .cta-contact-value {
+    font-size: 17px;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: block;
+  }
+  .cta-contact-value:hover { color: var(--gold); }
+
+  footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--black-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-dim);
+  }
+
+  .footer-copy { font-size: 14px; color: var(--white-dim); opacity: 0.5; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.animate { opacity: 0; transform: translateY(20px); }
+  .fade-in.animate.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 120px 24px 80px; }
+    section { padding: 72px 24px; }
+    .stats-bar { grid-template-columns: repeat(3, 1fr); padding: 40px 24px; gap: 32px; }
+    .stat { border-right: none; padding: 0; }
+    .principles { grid-template-columns: 1fr; }
+    .principle.full-width { grid-column: auto; }
+    .services-grid { grid-template-columns: 1fr; }
+    .about-layout { grid-template-columns: 1fr; gap: 48px; }
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Max Karnaukh</a>
+  <a href="#contact" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Sales Consultant · Dubai and North America</p>
+  <p class="hero-industries fade-in">SaaS &nbsp;·&nbsp; Fleet Tech &nbsp;·&nbsp; Real Estate &nbsp;·&nbsp; Business Setup &nbsp;·&nbsp; Finance &nbsp;·&nbsp; B2B Services</p>
+  <h1>Your Sales Team<br><em>Will Close More.</em></h1>
+  <p class="hero-sub">Most founders build a great product or service offer and then wonder why it is not selling. The answer is almost never the product or service. It is the system, or the lack of one. <strong>I fix that not only with sales training but by building a scalable, repeatable sales system.</strong></p>
+  <div class="hero-actions">
+    <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3mlzIGwxyvHjnXDq3kzp8aKBlIgSnv7dHFm36nHowND_AaJll7upQBuZbqSQo4a6lqQbLzOhkB" target="_blank" class="btn-primary">Book a Free Consultation</a>
+    <a href="#about" class="btn-secondary">Who Is Max &#8594;</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat" style="animation-delay:0.1s">
+    <div class="stat-number">40K+</div>
+    <div class="stat-label">Cold Calls Made</div>
+  </div>
+  <div class="stat" style="animation-delay:0.2s">
+    <div class="stat-number">15+</div>
+    <div class="stat-label">Years in Sales</div>
+  </div>
+  <div class="stat" style="animation-delay:0.3s">
+    <div class="stat-number">$40M+</div>
+    <div class="stat-label">Real Estate Closed</div>
+  </div>
+  <div class="stat" style="animation-delay:0.4s">
+    <div class="stat-number">Top 10%</div>
+    <div class="stat-label">Vancouver Agents</div>
+  </div>
+  <div class="stat" style="animation-delay:0.5s">
+    <div class="stat-number">5</div>
+    <div class="stat-label">Sales Verticals</div>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <span class="section-label fade-in">Before We Talk About What I Do</span>
+  <h2 class="section-title fade-in">Here Is <em>How I Think</em></h2>
+  <p class="philosophy-intro fade-in">This is the part that either resonates with you completely, or tells you I am not the right fit. Either way, you will know in 60 seconds.</p>
+
+  <div class="principles">
+    <div class="principle fade-in">
+      <span class="principle-num">01</span>
+      <h3>Only Sell to People Who Genuinely Need It</h3>
+      <p>Qualifying out fast is a sign of respect. Closing a prospect who has no real need for your product or service is the worst thing you can do. They will hate the experience, leave a bad review, and never refer anyone. A fast "no" beats a slow bad "yes" every time.</p>
+    </div>
+    <div class="principle fade-in">
+      <span class="principle-num">02</span>
+      <h3>Provide Real Value Before Asking for Anything</h3>
+      <p>The sale is a natural result of that. When a prospect feels like the conversation already helped them, closing becomes a formality.</p>
+    </div>
+    <div class="principle fade-in">
+      <span class="principle-num">03</span>
+      <h3>Cold Calling Is Not Dead</h3>
+      <p>It is at its peak effectiveness right now, because no one does it anymore. Every founder is hiding behind email and LinkedIn. The person who actually picks up the phone wins by default.</p>
+    </div>
+    <div class="principle fade-in">
+      <span class="principle-num">04</span>
+      <h3>Sales Is Education, Not Performance</h3>
+      <p>You should never be trying to "sell" anyone. You should be showing them, clearly and specifically, why your product or service fixes the exact problem they are sitting with right now. If you are reciting a script, you are performing. If you understand their problem better than they do, you are selling.</p>
+    </div>
+    <div class="principle fade-in full-width">
+      <span class="principle-num">05</span>
+      <h3>Systems Beat Individual Talent. Every Time.</h3>
+      <p>A struggling salesperson with a great system will run laps around a naturally gifted closer with no process. Stop trying to hire your way out of a systems problem. Build the infrastructure around your people, and watch average performers become consistent ones.</p>
+    </div>
+  </div>
+
+  <div class="resonance fade-in">
+    If you read that and thought <em>"yes, exactly, that is what has been missing"</em> keep reading.
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <span class="section-label fade-in">What You Actually Get</span>
+    <h2 class="section-title fade-in">A Complete <em>Sales Infrastructure</em></h2>
+    <p class="services-desc fade-in">When we work together, you get a complete sales infrastructure built around your specific product or service. Here is exactly what we build.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <h3>Cold Call Training</h3>
+      <p>Your team makes more dials, reaches more decision-makers, and stops losing deals in the first 30 seconds.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Sales Scripts That Convert</h3>
+      <p>Built around your offer and your buyer, so your reps sound confident because they are.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>CRM Setup and Optimization</h3>
+      <p>Every lead tracked, every follow-up scheduled, nothing falling through the cracks.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Pipeline Architecture</h3>
+      <p>A clear, stage-by-stage view of every deal so you always know where revenue is stalling and what to fix.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Lead Generation Systems</h3>
+      <p>LinkedIn outreach, cold email, and referral frameworks running simultaneously so you never rely on one source.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Follow-Up Sequences</h3>
+      <p>Most deals close on follow-up 5 or 6. Most reps stop at 2. We fix that gap.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Email Outreach Sequences</h3>
+      <p>Multi-step campaigns built to get high open rates, with hooks that feel human and asks that do not feel like pitches.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Objection Handling Playbook</h3>
+      <p>The 4 objections your team hears 80% of the time, fully scripted and practiced until they become automatic.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Discovery Call Frameworks</h3>
+      <p>How to run a call that qualifies fast, builds trust, and makes closing feel like the obvious next step.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>LinkedIn Growth Strategy</h3>
+      <p>Observation-based outreach that generates qualified meetings without ads or spamming your network.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>6-Month Sales Strategy with KPIs</h3>
+      <p>A month-by-month execution plan so your team knows exactly what to do, how to measure it, and when to adjust.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Live Roleplay and Coaching</h3>
+      <p>Not just theory. We drill real scenarios until your reps can handle anything they will face on a call.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Sales Hiring Criteria</h3>
+      <p>Stop hiring on gut feel. Get a clear profile of who to hire, what to test for, and what red flags to walk away from before you waste three months finding out.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>New Rep Onboarding Playbook</h3>
+      <p>A structured 30-day ramp that gets new salespeople productive fast, without months of trial and error eating into your pipeline.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Pricing and Offer Positioning</h3>
+      <p>How you frame price determines how buyers feel about it. We build framing that makes your offer feel like the obvious choice, not the expensive one.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Referral and Reactivation Systems</h3>
+      <p>Your existing clients and past leads are the fastest source of new revenue. Most businesses leave this entirely untouched. We build the system to capture it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <span class="section-label fade-in">The Person Behind the System</span>
+  <h2 class="section-title fade-in">15 Years. <em>Zero Shortcuts.</em></h2>
+
+  <div class="about-layout">
+    <div class="about-left">
+      <p class="about-text fade-in">Ukraine. England. Canada. Dubai.</p>
+      <p class="about-text fade-in"><strong>Four countries, four fresh starts, zero inherited networks.</strong> Every move was a reset, new market, new culture, new room to walk into cold and figure out fast. That pattern never bothered me. It is basically just sales on a larger scale.</p>
+      <p class="about-text fade-in">Here is what the career actually looked like.</p>
+
+      <div class="career-timeline">
+        <div class="career-item fade-in">
+          <div class="career-dot"></div>
+          <div>
+            <div class="career-role">Retail, Team Lead</div>
+            <div class="career-desc">Commission floor. Learned fast that reading a person matters more than any script.</div>
+          </div>
+        </div>
+        <div class="career-item fade-in">
+          <div class="career-dot"></div>
+          <div>
+            <div class="career-role">Phone Sales, Lottery Tickets</div>
+            <div class="career-desc">Pure cold outreach, pure rejection, pure volume. No warm leads, no referrals, no safety net. Somewhere around call 3,000 I stopped taking "no" personally. That is where the real foundation got built.</div>
+          </div>
+        </div>
+        <div class="career-item fade-in">
+          <div class="career-dot"></div>
+          <div>
+            <div class="career-role">B2B Finance</div>
+            <div class="career-desc">Longer cycles, relationship-first selling, learning why trust closes more deals than any tactic ever will.</div>
+          </div>
+        </div>
+        <div class="career-item fade-in">
+          <div class="career-dot"></div>
+          <div>
+            <div class="career-role">Medical SaaS</div>
+            <div class="career-desc">Selling to physicians, arguably the toughest room in sales. If you can get a busy, skeptical doctor to stop, listen, and buy, you can sell anything to anyone.</div>
+          </div>
+        </div>
+        <div class="career-item fade-in">
+          <div class="career-dot"></div>
+          <div>
+            <div class="career-role">Real Estate, Own Agency, Greater Vancouver</div>
+            <div class="career-desc">No brand, no database, no inherited clients. Top 10% of all agents in Greater Vancouver three out of four years. Then I sold the business and moved to Dubai.</div>
+          </div>
+        </div>
+        <div class="career-item fade-in">
+          <div class="career-dot"></div>
+          <div>
+            <div class="career-role">Dubai, VP of Sales at Two Companies</div>
+            <div class="career-desc">Not a vacation. A permanent decision with a wife, a young son, and 1 contact in a market I had never sold in before. Today I run sales at High Point GPS in fleet telematics and Kozyk Consultancy in UAE business setup simultaneously.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="numbers-block fade-in">
+        <div class="numbers-title">The Numbers, Because Founders Respect Numbers</div>
+        <div class="number-row">
+          <div class="number-val">40,000+</div>
+          <div class="number-desc">Cold calls made personally</div>
+        </div>
+        <div class="number-row">
+          <div class="number-val">$40M+</div>
+          <div class="number-desc">Closed in real estate sales</div>
+        </div>
+        <div class="number-row">
+          <div class="number-val">5</div>
+          <div class="number-desc">Completely different sales verticals mastered</div>
+        </div>
+        <div class="number-row">
+          <div class="number-val">2</div>
+          <div class="number-desc">Failed startups, both taught me more than any win did</div>
+        </div>
+        <div class="number-row">
+          <div class="number-val">2</div>
+          <div class="number-desc">VP of Sales roles running simultaneously right now</div>
+        </div>
+        <div class="number-row">
+          <div class="number-val">15+</div>
+          <div class="number-desc">Years. Zero shortcuts.</div>
+        </div>
+      </div>
+
+      <div class="personal-block fade-in">
+        <p>Happily married. One-and-a-half-year-old son who has absolutely no idea his dad talks to strangers on the phone for a living. He will figure it out eventually.</p>
+        <p>I did not come from a sales family. Nobody handed me a network or a book of business. Every room I walked into, I walked into cold.</p>
+        <p>When I sit across from a founder who is trying to build something from nothing, I am not nodding politely. <strong style="color:var(--white)">I have been there. Multiple times. In multiple countries.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <span class="section-label fade-in">Common Questions</span>
+  <h2 class="section-title fade-in">Straight <em>Answers.</em></h2>
+
+  <div class="faq-list">
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        My team is already doing outreach. What would you actually change?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Doing outreach and having a system are two different things. Most teams are making calls and sending emails without a clear qualification framework, a consistent discovery process, or tracked follow-up sequences. The result is a lot of activity that does not compound. <strong>What I change is the infrastructure underneath the activity</strong> so that each touchpoint builds on the last, reps know exactly what to say at each stage, and you can see where deals are stalling instead of guessing. If your team is already doing the basics and still not moving numbers, the problem is almost always in one of three places: the opening, the qualification, or the follow-up. We find it in the first session.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Do you only work with real estate? What industries do you cover?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Real estate is one chapter of a much longer story. I have sold in fleet technology, medical SaaS, B2B finance, UAE business setup, and built a real estate agency from zero to top 10% in Greater Vancouver before selling it. <strong>The industries I work with now include SaaS, logistics and fleet, business consulting, professional services, recruitment, digital agencies, and B2B services of most kinds.</strong> The fundamentals of a sales system do not change across industries. What changes is the language, the buyer psychology, and the cycle length. I adapt to all of them.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What does working together actually look like?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          It starts with a free call where I listen more than I talk. If there is a real fit, we agree on scope and I get to work. Depending on what you need, that could mean a full sales audit delivered within a week, a focused sprint to fix one specific gap, or an ongoing monthly engagement where I work alongside your team. <strong>Everything is built around your specific offer, your buyers, and your current team.</strong> You will not get a generic playbook pulled from a template. You will get something that works for your situation specifically.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        We already have a sales manager. Why would we need you?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          A good sales manager runs the day-to-day. They coach, they push, they hold the team accountable. What they rarely have time to do is step back and rebuild the system from the ground up while also running a pipeline. <strong>I come in as the person who does exactly that</strong> without disrupting what your manager is doing. Most of the founders and sales managers I work with are relieved to have someone else own the infrastructure build so they can stay focused on running the team and closing.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How quickly can we expect to see results?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Some things move fast. A better opening line, a tighter qualifying question, a fixed follow-up sequence. Teams often notice a difference in tone and confidence within the first two weeks. <strong>Measurable pipeline impact typically shows up within 30 to 60 days</strong> depending on your sales cycle length. Building a full system that runs without you constantly managing it takes 90 days. I will tell you exactly what to expect based on your specific situation on the first call, not after you have signed anything.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Would You Like<br><em>to Talk?</em></h2>
+  <p>Book a free call or send me a message on WhatsApp. No pitch, no pressure. Just an honest conversation about your sales.</p>
+  <div class="cta-buttons">
+    <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3mlzIGwxyvHjnXDq3kzp8aKBlIgSnv7dHFm36nHowND_AaJll7upQBuZbqSQo4a6lqQbLzOhkB" target="_blank" class="btn-primary">Book a Free Call</a>
+    <a href="https://wa.me/971506069889" target="_blank" class="btn-outline">Message on WhatsApp</a>
+  </div>
+
+  <div class="cta-contacts">
+    <div class="cta-contact-item">
+      <div class="cta-contact-label">WhatsApp</div>
+      <a href="https://wa.me/971506069889" class="cta-contact-value">+971 50 606 9889</a>
+    </div>
+    <div class="cta-contact-item">
+      <div class="cta-contact-label">Email</div>
+      <a href="mailto:max64800@gmail.com" class="cta-contact-value">max64800@gmail.com</a>
+    </div>
+    <div class="cta-contact-item">
+      <div class="cta-contact-label">Instagram</div>
+      <a href="https://instagram.com/max.karnaukh.realty" class="cta-contact-value" target="_blank">@max.karnaukh.realty</a>
+    </div>
+    <div class="cta-contact-item">
+      <div class="cta-contact-label">LinkedIn</div>
+      <a href="https://www.linkedin.com/in/maxkarnaukh/?skipRedirect=true" class="cta-contact-value" target="_blank">maxkarnaukh</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Max Karnaukh</div>
+  <div class="footer-copy">&#169; 2026 · Dubai, UAE · Sales Consulting</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
