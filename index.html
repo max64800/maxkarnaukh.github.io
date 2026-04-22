@@ -104,9 +104,21 @@
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-industries {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.3s;
   }
 
   .hero h1 {
@@ -475,6 +487,85 @@
   }
   .personal-block p:last-child { margin-bottom: 0; }
 
+  .faq-section {
+    border-top: 1px solid var(--black-border);
+    border-bottom: 1px solid var(--black-border);
+    background: var(--black-soft);
+  }
+
+  .faq-list {
+    margin-top: 56px;
+    border-top: 1px solid var(--black-border);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--black-border);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    text-align: left;
+    padding: 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--gold); }
+
+  .faq-icon {
+    min-width: 28px;
+    height: 28px;
+    border: 1px solid var(--black-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--gold);
+    transition: transform 0.3s, background 0.2s;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: var(--gold);
+    color: var(--black);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 400px;
+  }
+
+  .faq-answer-inner {
+    padding-bottom: 32px;
+    font-size: 18px;
+    color: var(--white-dim);
+    line-height: 1.8;
+    max-width: 780px;
+  }
+
+  .faq-answer-inner strong { color: var(--white); font-weight: 500; }
+
+  /* CTA */
   .cta-section {
     background: var(--black-soft);
     border-top: 1px solid var(--black-border);
@@ -607,6 +698,7 @@
 <!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">Sales Consultant · Dubai and North America</p>
+  <p class="hero-industries fade-in">SaaS &nbsp;·&nbsp; Fleet Tech &nbsp;·&nbsp; Real Estate &nbsp;·&nbsp; Business Setup &nbsp;·&nbsp; Finance &nbsp;·&nbsp; B2B Services</p>
   <h1>Your Sales Team<br><em>Will Close More.</em></h1>
   <p class="hero-sub">Most founders build a great product or service offer and then wonder why it is not selling. The answer is almost never the product or service. It is the system, or the lack of one. <strong>I fix that not only with sales training but by building a scalable, repeatable sales system.</strong></p>
   <div class="hero-actions">
@@ -735,6 +827,22 @@
       <h3>Live Roleplay and Coaching</h3>
       <p>Not just theory. We drill real scenarios until your reps can handle anything they will face on a call.</p>
     </div>
+    <div class="service-card fade-in">
+      <h3>Sales Hiring Criteria</h3>
+      <p>Stop hiring on gut feel. Get a clear profile of who to hire, what to test for, and what red flags to walk away from before you waste three months finding out.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>New Rep Onboarding Playbook</h3>
+      <p>A structured 30-day ramp that gets new salespeople productive fast, without months of trial and error eating into your pipeline.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Pricing and Offer Positioning</h3>
+      <p>How you frame price determines how buyers feel about it. We build framing that makes your offer feel like the obvious choice, not the expensive one.</p>
+    </div>
+    <div class="service-card fade-in">
+      <h3>Referral and Reactivation Systems</h3>
+      <p>Your existing clients and past leads are the fastest source of new revenue. Most businesses leave this entirely untouched. We build the system to capture it.</p>
+    </div>
   </div>
 </section>
 
@@ -833,6 +941,76 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <span class="section-label fade-in">Common Questions</span>
+  <h2 class="section-title fade-in">Straight <em>Answers.</em></h2>
+
+  <div class="faq-list">
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        My team is already doing outreach. What would you actually change?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Doing outreach and having a system are two different things. Most teams are making calls and sending emails without a clear qualification framework, a consistent discovery process, or tracked follow-up sequences. The result is a lot of activity that does not compound. <strong>What I change is the infrastructure underneath the activity</strong> so that each touchpoint builds on the last, reps know exactly what to say at each stage, and you can see where deals are stalling instead of guessing. If your team is already doing the basics and still not moving numbers, the problem is almost always in one of three places: the opening, the qualification, or the follow-up. We find it in the first session.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Do you only work with real estate? What industries do you cover?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Real estate is one chapter of a much longer story. I have sold in fleet technology, medical SaaS, B2B finance, UAE business setup, and built a real estate agency from zero to top 10% in Greater Vancouver before selling it. <strong>The industries I work with now include SaaS, logistics and fleet, business consulting, professional services, recruitment, digital agencies, and B2B services of most kinds.</strong> The fundamentals of a sales system do not change across industries. What changes is the language, the buyer psychology, and the cycle length. I adapt to all of them.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What does working together actually look like?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          It starts with a free call where I listen more than I talk. If there is a real fit, we agree on scope and I get to work. Depending on what you need, that could mean a full sales audit delivered within a week, a focused sprint to fix one specific gap, or an ongoing monthly engagement where I work alongside your team. <strong>Everything is built around your specific offer, your buyers, and your current team.</strong> You will not get a generic playbook pulled from a template. You will get something that works for your situation specifically.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        We already have a sales manager. Why would we need you?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          A good sales manager runs the day-to-day. They coach, they push, they hold the team accountable. What they rarely have time to do is step back and rebuild the system from the ground up while also running a pipeline. <strong>I come in as the person who does exactly that</strong> without disrupting what your manager is doing. Most of the founders and sales managers I work with are relieved to have someone else own the infrastructure build so they can stay focused on running the team and closing.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How quickly can we expect to see results?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Some things move fast. A better opening line, a tighter qualifying question, a fixed follow-up sequence. Teams often notice a difference in tone and confidence within the first two weeks. <strong>Measurable pipeline impact typically shows up within 30 to 60 days</strong> depending on your sales cycle length. Building a full system that runs without you constantly managing it takes 90 days. I will tell you exactly what to expect based on your specific situation on the first call, not after you have signed anything.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <h2>Would You Like<br><em>to Talk?</em></h2>
@@ -878,6 +1056,13 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
 </script>
 </body>
 </html>
